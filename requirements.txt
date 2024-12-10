@@ -1,0 +1,6 @@
+# List of libraries required for the Chaotic Boltzmann Machines project
+
+numpy
+scipy
+matplotlib
+
