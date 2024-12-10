@@ -17,7 +17,7 @@ Simulation time span (𝑡_span).
 NUM_UNITS = 10
 
 # Temperature of the system
-TEMPERATURE = 0.5
+TEMPERATURE = 1.0
 
 # Simulation time span
 TIME_SPAN = (0, 10)

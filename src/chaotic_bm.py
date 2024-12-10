@@ -34,24 +34,22 @@ def chaotic_dynamics(t, x, b, W, T):
     dx_dt = (1 - 2 * s) * (1 + exp_term)
     return dx_dt
 
-def run_simulation(biases, weights):
+def run_simulation(biases, weights, num_nodes, temperature=1.0, t_span=(0, 10), time_eval_steps=500):
     """
     Runs the CBM simulation over the specified time span.
     """
-    x0, _ = initialize_states(NUM_UNITS)
-    t_eval = np.linspace(TIME_SPAN[0], TIME_SPAN[1], TIME_EVAL_STEPS)
+    # Initialize states based on the graph size
+    x0, _ = initialize_states(num_nodes)
+    t_eval = np.linspace(t_span[0], t_span[1], time_eval_steps)
 
-    print("Initial states:", x0)
-    print("Biases:", biases)
-    print("Weights:", weights)
-
+    # Run the simulation
     solution = solve_ivp(
         chaotic_dynamics,
-        TIME_SPAN,
+        t_span,
         x0,
-        args=(biases, weights, TEMPERATURE),
-        t_eval=t_eval
+        args=(biases, weights, temperature),
+        t_eval=t_eval,
+        method='RK23'
     )
-    print("Final states:", solution.y[:, -1])
     return solution
 
